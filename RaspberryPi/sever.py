@@ -1,5 +1,4 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import requests
 
 class MyHTTPRequestHandler(BaseHTTPRequestHandler):
     List_Data = []  # initialize List_Data as a class attribute
@@ -44,6 +43,8 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
 
         elif self.path == '/send_data':
             self.send_response(200)
+            self.send_header('Content-type', 'text/plain')
+            self.end_headers()
             content_length = int(self.headers.get('Content-Length', 0))
             data = self.rfile.read(content_length).decode('utf-8')
             print(data)

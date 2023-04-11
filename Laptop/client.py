@@ -20,22 +20,18 @@ class Main:
             while True:
                 response = requests.post(self._url_get_line)
                 if response.text == "Finsh":
-                    print("Ready to predict data")
                     self.askInput()
                 else:
                     openfile.write(response.text)
             del openfile
     def askInput(self):
+        print("Read to predct")
         self.predict.makeIntialzationList()
         while True:
             response = requests.get(self._url_ask_input)
             predict_result = self.predict.predictresult(response.text.split("\n")[-1].strip())
             response = requests.post(self._url_send_data, data=predict_result)
 
-
-                
 if __name__ == '__main__':
     Main = Main()
     Main.run()
-
-

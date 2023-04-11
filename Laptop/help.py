@@ -106,5 +106,3 @@ class Help:
             output = output + str(round(i)) + " "
             lis.append(round(i))
         return output[:-1],lis
-
-
