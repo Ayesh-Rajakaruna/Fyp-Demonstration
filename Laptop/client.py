@@ -20,6 +20,7 @@ class Main:
             while True:
                 response = requests.post(self._url_get_line)
                 if response.text == "Finsh":
+                    print("Ready to predict data")
                     self.askInput()
                 else:
                     openfile.write(response.text)

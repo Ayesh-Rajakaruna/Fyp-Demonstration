@@ -28,12 +28,6 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(inputdata.encode())
 
-        elif self.path == '/send_data':
-            self.send_response(200)
-            content_length = int(self.headers.get('Content-Length', 0))
-            data = self.rfile.read(content_length).decode('utf-8')
-            print(data)
-
         else:
             self.send_error(404)
 
@@ -47,6 +41,13 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
                 MyHTTPRequestHandler.List_Data.pop(0)  # remove the sent element from the list
             else:
                 self.wfile.write("Finsh".encode())  # send an empty response if List_Data is empty
+
+        elif self.path == '/send_data':
+            self.send_response(200)
+            content_length = int(self.headers.get('Content-Length', 0))
+            data = self.rfile.read(content_length).decode('utf-8')
+            print(data)
+            
         else:
             self.send_error(404)
 
