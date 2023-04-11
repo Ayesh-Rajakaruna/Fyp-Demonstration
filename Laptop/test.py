@@ -12,38 +12,54 @@ from help import Help
 class Test:
 
     def __init__(self):
-        self.batch_size = 100
+        self.batch_size = 1
         self.number_of_inputs = 1
         self.number_of_outputs = 16
-        self.time_steps = 16
-        self.epochs = 10
+        self.time_steps = 10
         self.lr = 0.01
         self.filename = "Laptop/DataSets/Initialization.txt"
         self.NeuralFunction = Help()
-        self.X_train,self.Y_train = self.NeuralFunction.readFile(self.NeuralFunction, self.filename, self.number_of_inputs)
-        self.model == None
+        
+        self.opt = optimizers.Adam(learning_rate=self.lr,decay=0.04)
+        self.k_initializer=initializers.HeNormal()
+
+    def makeIntialzationList(self):
+        self.X_train,self.Y_train = self.NeuralFunction.readFile(self.filename, self.number_of_inputs)
+        self.X_train_, self.Y_train_ = self.NeuralFunction.intializeDataSet(self.X_train,self.Y_train)
+
+
+        self.Input_Data_For_Prediction = self.NeuralFunction.makeInputForPradict(self.X_train_, self.Y_train_, self.time_steps)
+        print(self.X_train_)
+        print(self.Input_Data_For_Prediction)
+        self.model = self.NeuralFunction.createModel(self.Input_Data_For_Prediction[0].shape, self.number_of_outputs, self.k_initializer, self.opt,  self.batch_size)
+        self.model.load_weights('./Laptop/Weights/my_model_weights.h5')
     
     def predictresult(self, inputData):
 
-        
         self.X_train.append([int(x) for x in inputData.split()])
-        self.Y_train.append([0 for y in range(self.number_of_outputs)])
+        self.Y_train.append([])
         self.X_train.pop(0)
         self.Y_train.pop(0)
 
-        X_train_, Y_train_ = self.NeuralFunction.intializeDataSet(self.NeuralFunction, self.X_train,self.Y_train)
-        Sequential_X_train = self.NeuralFunction.makeInputForPradict(self.NeuralFunction, X_train_, Y_train_, self.time_steps)
+        self.X_train_, self.Y_train_ = self.NeuralFunction.intializeDataSet(self.X_train,self.Y_train)
+        self.Input_Data_For_Prediction = self.NeuralFunction.makeInputForPradict(self.X_train_, self.Y_train_, self.time_steps)
 
-        opt = optimizers.Adam(learning_rate=self.lr,decay=0.04)
-        k_initializer=initializers.HeNormal()
+        predicted_result = self.model.predict(self.Input_Data_For_Prediction)
+        predicted_result, predictresultlist = self.NeuralFunction.listToString(predicted_result)
 
-        if self.model == None:
-            self.model = self.NeuralFunction.createModel(self.NeuralFunction, Sequential_X_train[0].shape, self.number_of_outputs, k_initializer, opt,  self.batch_size)
-            self.model.load_weights('./Laptop/Model/Weights/my_model_weights.h5')
-        else:
-            pass
-        
-        return self.model.predict(Sequential_X_train)
+        self.Y_train[-1] = predictresultlist
+        print(self.Input_Data_For_Prediction[0], " ---> ", np.array(predictresultlist))
+      
+        return predicted_result
         # For wights & model
         # model.save('NN for testing/saved_model/my_model.hdf5')
         # model.save_weights('NN for testing/saved_model/my_model_weights.h5')
+        
+"""
+test = Test()
+test.makeIntialzationList()
+while True:
+    i = input("Give Input: ")
+    test.predictresult(i)
+    print(" ")
+"""

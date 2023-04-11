@@ -14,7 +14,7 @@ class Main:
 
     def run(self):
         response = requests.get(self._url_start_transmition)
-        if response.text == "ReadyToTransmit":
+        if response.text== "ReadyToTransmit":
             openfile =  WriteFile()
             openfile.start("Counter")
             while True:
@@ -22,13 +22,14 @@ class Main:
                 if response.text == "Finsh":
                     self.askInput()
                 else:
-                    openfile.write(response.text,self.Instanses)
+                    openfile.write(response.text)
             del openfile
     def askInput(self):
+        self.predict.makeIntialzationList()
         while True:
             response = requests.get(self._url_ask_input)
-            predict_result = self.predict.predictresult(self.predict, response.text.strip())
-            response = requests.post(self._url_send_data, data=predict_result.strip())
+            predict_result = self.predict.predictresult(response.text.split("\n")[-1].strip())
+            response = requests.post(self._url_send_data, data=predict_result)
 
 
                 

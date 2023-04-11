@@ -26,15 +26,10 @@ class Help:
         f1 = open(file, "r")
         X = []
         Y = []
-        count = 1
         for line in f1:
-            if count == 1:
-                pass
-            else: 
-                items = [int(x.strip().replace("'", "")) for x in line.strip().split()] 
-                X.append(items[:number_of_input])
-                Y.append(items[number_of_input:])
-            count += 1
+            items = [int(x.strip().replace("'", "")) for x in line.strip().split()] 
+            X.append(items[:number_of_input])
+            Y.append(items[number_of_input:])
         return X,Y
 
     # Concatanate (n-1)th output to (n)th inputs
@@ -43,7 +38,7 @@ class Help:
         X_ = []
         Y_ = []
         for i in range(len(X)):
-            if i == 0 and i == 1:
+            if i == 0:
                 pass
             else:
                 X_.append([i for i in X[i]]+[i for i in Y[i-1]])
@@ -54,8 +49,8 @@ class Help:
     # 3D array ------> [Samples, Time steps, Features]
     def reArangeDataSet(self, X, Y, time_steps):
         Sequential_X = []
-        Sequential_Y = Y[time_steps:]
-        for i in range(len(X) - time_steps):
+        Sequential_Y = Y[time_steps-1:]
+        for i in range(len(X)-time_steps+1):
             Sequential_X.append(X[i:i + time_steps])
         Sequential_X = np.array(Sequential_X)
         Sequential_Y = np.array(Sequential_Y)
@@ -64,7 +59,7 @@ class Help:
     # Make the input for prediction
     def makeInputForPradict(self, X, Y, time_steps):
         Sequential_X = []
-        for i in range(len(X) - time_steps):
+        for i in range(len(X)+1 - time_steps):
             Sequential_X.append(X[i:i + time_steps])
         Sequential_X = np.array([Sequential_X[-1]])
         return Sequential_X
@@ -83,7 +78,7 @@ class Help:
 
     # fit network / training
     def trainModel(self, model, X_train, y_train, X_val, y_val, Epochs, b_size):    
-        model.fit(X_train, y_train, validation_data=(X_val, y_val), batch_size=b_size, epochs = Epochs, verbose=1, shuffle=False, callbacks=[ResetStatesCallback()]) # callbacks=[tensorboard_callback, early_stopping, reduce_lr, WandbCallback(), ResetStatesCallback])
+        model.fit(X_train, y_train, validation_data=(X_val, y_val), batch_size=b_size, epochs = Epochs, verbose=1, shuffle=False) # callbacks=[tensorboard_callback, early_stopping, reduce_lr, WandbCallback(), ResetStatesCallback])
         return model
 
 
@@ -102,5 +97,14 @@ class Help:
             if (count > timestep):
                 break
             count = count + 1
+
+            
+    def listToString(self, listofoutput):
+        output = ""
+        lis = []
+        for i in listofoutput[0]:
+            output = output + str(round(i)) + " "
+            lis.append(round(i))
+        return output[:-1],lis
 
 

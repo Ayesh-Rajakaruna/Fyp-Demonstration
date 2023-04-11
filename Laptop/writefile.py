@@ -11,10 +11,10 @@ class WriteFile:
         self.fw = open("./Laptop/DataSets/{}{}.txt".format(self.Name, self.fileNum), "w")
     
     def write(self,data):
-        if(self.count % 25000 == 0):
+        if(self.count % 1010 == 0):
             self.fileNum += 1
             self.fw.close()
-            Train.traingstart(self.traninDataSet, "./Laptop/DataSets/{}{}.txt".format(self.Name, self.fileNum - 1) )
+            Train.traingstart(self.traninDataSet, filename="./Laptop/DataSets/{}{}.txt".format(self.Name, 1) )
             self.fw = open("./Laptop/DataSets/{}{}.txt".format(self.Name, self.fileNum), "w")
         self.fw.write(data+"\n")
         self.count += 1
