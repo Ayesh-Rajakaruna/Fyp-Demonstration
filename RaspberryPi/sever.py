@@ -8,7 +8,7 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
         if self.path == '/start_transmition':
             MyHTTPRequestHandler.List_Data=[]
             try:
-                with open('file.txt', 'r') as f:
+                with open('counter.txt', 'r') as f:
                     for line in f:
                         line = line.strip()
                         MyHTTPRequestHandler.List_Data.append(line)  # use class attribute
@@ -37,12 +37,8 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
         else:
             self.send_error(404)
 
-        
-            
-
     def do_POST(self): 
         if self.path == '/get_line':
-            print(MyHTTPRequestHandler.List_Data)
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
