@@ -8,16 +8,18 @@ from keras.layers import InputLayer, Dense, LSTM, Dropout, BatchNormalization, L
 from keras.callbacks import Callback, EarlyStopping, ReduceLROnPlateau
 
 from help import Help
+from data import Data
 
 class Train():
 
     def __init__(self):
-        self.batch_size = 50
-        self.number_of_inputs = 1
-        self.number_of_outputs = 16
-        self.time_steps = 10
-        self.epochs = 10
-        self.lr = 0.01
+        data = Data()
+        self.batch_size = data.get_batch_size
+        self.number_of_inputs = data.get_number_of_inputs
+        self.number_of_outputs = data.get_number_of_outputs
+        self.time_steps = data.get_time_steps
+        self.epochs = data.get_epochs
+        self.lr = data.get_lr
         self.NeuralFunction = Help()
     
     def traingstart(self, filename):

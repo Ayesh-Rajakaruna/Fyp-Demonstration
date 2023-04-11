@@ -8,15 +8,17 @@ from keras.layers import InputLayer, Dense, LSTM, Dropout, BatchNormalization, L
 from keras.callbacks import Callback, EarlyStopping, ReduceLROnPlateau
 
 from help import Help
+from data import Data
 
 class Test:
 
     def __init__(self):
+        data = Data()
         self.batch_size = 1
-        self.number_of_inputs = 1
-        self.number_of_outputs = 16
-        self.time_steps = 10
-        self.lr = 0.01
+        self.number_of_inputs = data.get_number_of_inputs
+        self.number_of_outputs = data.get_number_of_outputs
+        self.time_steps = data.get_time_steps
+        self.lr = data.get_lr
         self.filename = "Laptop/DataSets/Initialization.txt"
         self.NeuralFunction = Help()
         
