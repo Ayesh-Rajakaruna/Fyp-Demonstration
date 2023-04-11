@@ -15,10 +15,10 @@ class Test:
     def __init__(self):
         data = Data()
         self.batch_size = 1
-        self.number_of_inputs = data.get_number_of_inputs
-        self.number_of_outputs = data.get_number_of_outputs
-        self.time_steps = data.get_time_steps
-        self.lr = data.get_lr
+        self.number_of_inputs = data.get_number_of_inputs()
+        self.number_of_outputs = data.get_number_of_outputs()
+        self.time_steps = data.get_time_steps()
+        self.lr = data.get_lr()
         self.filename = "Laptop/DataSets/Initialization.txt"
         self.NeuralFunction = Help()
         
@@ -31,8 +31,6 @@ class Test:
 
 
         self.Input_Data_For_Prediction = self.NeuralFunction.makeInputForPradict(self.X_train_, self.Y_train_, self.time_steps)
-        print(self.X_train_)
-        print(self.Input_Data_For_Prediction)
         self.model = self.NeuralFunction.createModel(self.Input_Data_For_Prediction[0].shape, self.number_of_outputs, self.k_initializer, self.opt,  self.batch_size)
         self.model.load_weights('./Laptop/Weights/my_model_weights.h5')
     
@@ -50,7 +48,7 @@ class Test:
         predicted_result, predictresultlist = self.NeuralFunction.listToString(predicted_result)
 
         self.Y_train[-1] = predictresultlist
-        print(self.Input_Data_For_Prediction[0], " ---> ", np.array(predictresultlist))
+        #print(self.Input_Data_For_Prediction[0], " ---> ", np.array(predictresultlist))
       
         return predicted_result
         # For wights & model

@@ -14,12 +14,12 @@ class Train():
 
     def __init__(self):
         data = Data()
-        self.batch_size = data.get_batch_size
-        self.number_of_inputs = data.get_number_of_inputs
-        self.number_of_outputs = data.get_number_of_outputs
-        self.time_steps = data.get_time_steps
-        self.epochs = data.get_epochs
-        self.lr = data.get_lr
+        self.batch_size = data.get_batch_size()
+        self.number_of_inputs = data.get_number_of_inputs()
+        self.number_of_outputs = data.get_number_of_outputs()
+        self.time_steps = data.get_time_steps()
+        self.epochs = data.get_epochs()
+        self.lr = data.get_lr()
         self.NeuralFunction = Help()
     
     def traingstart(self, filename):
@@ -47,8 +47,8 @@ class Train():
         X_val = Sequential_X_val[:Validation_data_set_size]
         Y_val = Sequential_Y_val[:Validation_data_set_size]
 
-        for i,j in zip(X_train[:50], Y_train[:50]):
-            print(i, " ----> ", j)
+        #for i,j in zip(X_train[:50], Y_train[:50]):
+        #    print(i, " ----> ", j)
 
         model = self.NeuralFunction.createModel(Sequential_X_train[0].shape, self.number_of_outputs, k_initializer, opt,  self.batch_size)            
         try:
