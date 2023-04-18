@@ -14,19 +14,21 @@ class Main:
 
     def run(self):
         response = requests.get(self._url_start_transmition)
+        print(response.text)
         if response.text== "ReadyToTransmit":
             openfile =  WriteFile()
             openfile.start("Counter")
             count = 0
-            while count>1000:
+            while count<3000:
                 response = requests.post(self._url_get_line)
+                print(response.text)
                 if response.text == "No element":
                     pass
                 else:
                     openfile.write(response.text)
                     count = count + 1
             del openfile
-            self.askInput()
+        self.askInput()
     def askInput(self):
         print("Read to predct")
         self.predict.makeIntialzationList()
