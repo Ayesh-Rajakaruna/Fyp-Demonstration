@@ -1,20 +1,15 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from Data_rx import DataRx
+from multiprocessing import Manager
 
 class MyHTTPRequestHandler(BaseHTTPRequestHandler):
-    List_Data = []  # initialize List_Data as a class attribute
+    manager = Manager()
+    List_Data = manager.list() # initialize List_Data as a class attribute
 
     def do_GET(self):     
         if self.path == '/start_transmition':
-            MyHTTPRequestHandler.List_Data=[]
-            try:
-                with open('counter.txt', 'r') as f:
-                    for line in f:
-                        line = line.strip()
-                        MyHTTPRequestHandler.List_Data.append(line)  # use class attribute
-                    f.close()
-            except IOError:
-                self.send_response(500)
-                self.end_headers()
+            self.DataGenerator = DataRx()
+            self.DataGenerator.PutData(MyHTTPRequestHandler.List_Data)
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
@@ -36,10 +31,9 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
             if MyHTTPRequestHandler.List_Data:
-                self.wfile.write(MyHTTPRequestHandler.List_Data[0].encode())  # use class attribute
-                MyHTTPRequestHandler.List_Data.pop(0)  # remove the sent element from the list
+                self.wfile.write(MyHTTPRequestHandler.List_Data.pop(0).encode())  # remove and sent the first element of the list
             else:
-                self.wfile.write("Finsh".encode())  # send an empty response if List_Data is empty
+                self.wfile.write("No element") 
 
         elif self.path == '/send_data':
             self.send_response(200)

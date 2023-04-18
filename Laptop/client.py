@@ -17,13 +17,16 @@ class Main:
         if response.text== "ReadyToTransmit":
             openfile =  WriteFile()
             openfile.start("Counter")
-            while True:
+            count = 0
+            while count>1000:
                 response = requests.post(self._url_get_line)
-                if response.text == "Finsh":
-                    self.askInput()
+                if response.text == "No element":
+                    pass
                 else:
                     openfile.write(response.text)
+                    count = count + 1
             del openfile
+            self.askInput()
     def askInput(self):
         print("Read to predct")
         self.predict.makeIntialzationList()
