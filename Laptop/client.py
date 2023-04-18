@@ -1,6 +1,7 @@
 import requests
 from writefile import WriteFile
 from test import Test
+from data import Data
 
 class Main:
 
@@ -11,6 +12,7 @@ class Main:
         self._url_send_data = 'http://192.168.8.189:8000/send_data'
 
         self.predict = Test()
+        self.data = Data()
 
     def run(self):
         response = requests.get(self._url_start_transmition)
@@ -19,13 +21,12 @@ class Main:
             openfile =  WriteFile()
             openfile.start("Counter")
             count = 0
-            while count<3000:
+            while count<self.data.get_number_of_data_point():
                 response = requests.post(self._url_get_line)
                 print(response.text)
                 if response.text == "No element":
                     pass
                 else:
-                    openfile.write(response.text)
                     count = count + 1
             del openfile
         self.askInput()

@@ -6,6 +6,7 @@ class Data:
         self.__time_steps = 10
         self.__epochs = 10
         self.__lr = 0.01
+        self.__number_of_data_point = 10000
     
     def get_batch_size(self):
         return self.__batch_size
@@ -24,3 +25,6 @@ class Data:
     
     def get_lr(self):
         return self.__lr
+    
+    def get_number_of_data_point(self):
+        return self.__number_of_data_point
