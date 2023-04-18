@@ -5,11 +5,13 @@ class DataRx:
         # open the serial port at the appropriate baud rate and settings
         self.ser = serial.Serial('COM7', baudrate = 115200, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0.001)
 
-    def PutData(self, DataList):
+    def PutData(self, DataList, Stage_Data):
         prev_value_first_3bits = None
         prev_value = None
         circuit_data = ''
         while True:
+            if Stage_Data[0] == "Stop":
+                break
             # Read 10 bytes from serial port
             data = self.ser.read(10) 
             if data:

@@ -6,23 +6,20 @@ import threading
 class MyHTTPRequestHandler(BaseHTTPRequestHandler):
     manager = Manager()
     List_Data = manager.list() # initialize List_Data as a class attribute
+    Stage_Data = manager.list()
+    Stage_Data.append("Runing")
     def do_GET(self):     
         if self.path == '/start_transmition':
-            print("Start")
             self.DataGenerator = DataRx()
-            print("Make DataRx")
-            print("Start")
-            t1 = threading.Thread(target=self.DataGenerator.PutData, args=(MyHTTPRequestHandler.List_Data,))
+            t1 = threading.Thread(target=self.DataGenerator.PutData, args=(MyHTTPRequestHandler.List_Data, MyHTTPRequestHandler.Stage_Data,))
             t1.start()
-            print("Stop")
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
             self.wfile.write("ReadyToTransmit".encode()) # Ready to transmit
-            print("send result")
-
 
         elif self.path == '/ask_input':
+            MyHTTPRequestHandler.Stage_Data[0] = "Stop"
             inputdata = input("Prease enter input line: ")
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
