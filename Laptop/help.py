@@ -27,7 +27,7 @@ class Help:
         X = []
         Y = []
         for line in f1:
-            items = [int(x.strip()) for x in line.strip().split()] 
+            items = [int(x) for x in line.strip()] 
             X.append(items[:number_of_input])
             Y.append(items[number_of_input:])
         return X,Y
