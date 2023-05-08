@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from tensorflow import keras
 from keras.models import Sequential
 from keras import initializers, optimizers
-from keras.layers import InputLayer, Dense, LSTM, Dropout, BatchNormalization, LayerNormalization, GroupNormalization
+from keras.layers import InputLayer, Dense, LSTM, Dropout, BatchNormalization, LayerNormalization
 from keras.callbacks import Callback, EarlyStopping, ReduceLROnPlateau
 
 from help import Help
@@ -47,7 +47,9 @@ class Train():
         X_val = Sequential_X_val[:Validation_data_set_size]
         Y_val = Sequential_Y_val[:Validation_data_set_size]
 
-        #for i,j in zip(X_train[:50], Y_train[:50]):
+        # print("X_train: ", X_train.shape)
+        # print("Y_train: ", Y_train.shape)
+        # for i,j in zip(X_train[:10], Y_train[:10]):
         #    print(i, " ----> ", j)
 
         model = self.NeuralFunction.createModel(Sequential_X_train[0].shape, self.number_of_outputs, k_initializer, opt,  self.batch_size)            
@@ -60,7 +62,8 @@ class Train():
         # For wights & model
         # model.save('NN for testing/saved_model/my_model.hdf5')
         # model.save_weights('NN for testing/saved_model/my_model_weights.h5')
-"""
-train = Train()
-train.traingstart(filename="./Laptop/DataSets/counter.txt")
-"""        
+
+# custom function
+# train = Train()
+# train.traingstart(filename="./Laptop/DataSets/received_data.txt")
+       

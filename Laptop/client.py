@@ -6,12 +6,12 @@ from data import Data
 class Main:
 
     def __init__(self):
-        self._url_start_transmition = 'http://192.168.8.189:8000/start_transmition'
-        self._url_get_line = 'http://192.168.8.189:8000/get_line'
-        self._url_ask_input = 'http://192.168.8.189:8000/ask_input'
-        self._url_send_data = 'http://192.168.8.189:8000/send_data'
+        self._url_start_transmition = 'http://192.168.1.20:8000/start_transmition'
+        self._url_get_line = 'http://192.168.1.20:8000/get_line'
+        self._url_ask_input = 'http://192.168.1.20:8000/ask_input'
+        self._url_send_data = 'http://192.168.1.20:8000/send_data'
 
-        self.predict = Test()
+        self.predict = [Test(), Test()] 
         self.data = Data()
 
     def run(self):
@@ -27,17 +27,21 @@ class Main:
                 if response.text == "No element":
                     pass
                 else:
+                    openfile.write(response.text)
                     count = count + 1
             del openfile
         self.askInput()
     def askInput(self):
-        print("Read to predct")
-        self.predict.makeIntialzationList()
+        print("Ready to predict")
+        for i in self.predict:
+            i.makeIntialzationList()
         while True:
             response = requests.get(self._url_ask_input)
-            predict_result = self.predict.predictresult(response.text.split("\n")[-1].strip())
+            predict_result = ""
+            for i,j in zip(self.predict,[i for i in response.text.split("\n")[-1].strip()]):
+                predict_result += str(i.predictresult(j)) + " "
             response = requests.post(self._url_send_data, data=predict_result)
 
 if __name__ == '__main__':
     Main = Main()
-    Main.run()
+    Main.askInput()

@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from tensorflow import keras
 from keras.models import Sequential
 from keras import initializers, optimizers
-from keras.layers import InputLayer, Dense, LSTM, Dropout, BatchNormalization, LayerNormalization, GroupNormalization
+from keras.layers import InputLayer, Dense, LSTM, Dropout, BatchNormalization, LayerNormalization
 from keras.callbacks import Callback, EarlyStopping, ReduceLROnPlateau
 
 
@@ -28,8 +28,8 @@ class Help:
         Y = []
         for line in f1:
             items = [int(x) for x in line.strip()] 
-            X.append(items[:number_of_input])
-            Y.append(items[number_of_input:])
+            X.append(items[len(items)-number_of_input:])
+            Y.append(items[:len(items)-number_of_input])
         return X,Y
 
     # Concatanate (n-1)th output to (n)th inputs
@@ -103,6 +103,6 @@ class Help:
         output = ""
         lis = []
         for i in listofoutput[0]:
-            output = output + str(round(i)) + " "
+            output = output + str(round(i)) 
             lis.append(round(i))
         return output[:-1],lis

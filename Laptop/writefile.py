@@ -1,8 +1,10 @@
 from train import Train
+from data import Data
 
 class WriteFile:
     def __init__(self):
         self.traninDataSet = Train()
+        self.Data = Data()
         
     def start(self, Name= "Data"):
         self.count = 1
@@ -11,7 +13,7 @@ class WriteFile:
         self.fw = open("./Laptop/DataSets/{}{}.txt".format(self.Name, self.fileNum), "w")
     
     def write(self,data):
-        if(self.count % 1010 == 0):
+        if(self.count % self.Data.get_data_per_one_file() == 0):
             self.fileNum += 1
             self.fw.close()
             Train.traingstart(self.traninDataSet, filename="./Laptop/DataSets/{}{}.txt".format(self.Name, 1) )

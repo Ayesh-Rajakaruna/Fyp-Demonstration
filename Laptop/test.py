@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from tensorflow import keras
 from keras.models import Sequential
 from keras import initializers, optimizers
-from keras.layers import InputLayer, Dense, LSTM, Dropout, BatchNormalization, LayerNormalization, GroupNormalization
+from keras.layers import InputLayer, Dense, LSTM, Dropout, BatchNormalization, LayerNormalization
 from keras.callbacks import Callback, EarlyStopping, ReduceLROnPlateau
 
 from help import Help
@@ -48,18 +48,18 @@ class Test:
         predicted_result, predictresultlist = self.NeuralFunction.listToString(predicted_result)
 
         self.Y_train[-1] = predictresultlist
-        #print(self.Input_Data_For_Prediction[0], " ---> ", np.array(predictresultlist))
-      
+        # print(self.Input_Data_For_Prediction[0], " ---> ", np.array(predictresultlist))
+        
         return predicted_result
         # For wights & model
         # model.save('NN for testing/saved_model/my_model.hdf5')
         # model.save_weights('NN for testing/saved_model/my_model_weights.h5')
         
-"""
-test = Test()
-test.makeIntialzationList()
-while True:
-    i = input("Give Input: ")
-    test.predictresult(i)
-    print(" ")
-"""
+# custom function
+# test = Test()
+# test.makeIntialzationList()
+# while True:
+#     i = input("Give Input: ")
+#     test.predictresult(i)
+#     print("test.predictresult(i)")
+#     print(" ")
