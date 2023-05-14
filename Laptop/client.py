@@ -31,6 +31,7 @@ class Main:
                     count = count + 1
             del openfile
         self.askInput()
+        
     def askInput(self):
         print("Ready to predict")
         for i in self.predict:
@@ -38,7 +39,7 @@ class Main:
         while True:
             response = requests.get(self._url_ask_input)
             predict_result = ""
-            for i,j in zip(self.predict,[i for i in response.text.split("\n")[-1].strip()]):
+            for i,j in zip(self.predict,[i for i in response.text.split("\n")[-1].strip()]): # split the response.text by "\n", take the last element, strip the white space, and make it a list
                 predict_result += str(i.predictresult(j)) + " "
             response = requests.post(self._url_send_data, data=predict_result)
 

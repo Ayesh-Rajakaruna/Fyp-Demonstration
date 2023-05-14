@@ -88,6 +88,7 @@ class Help:
         newModel.set_weights(old_weights)
         newModel.compile(loss='binary_crossentropy', optimizer='rmsprop')
 
+    # write the initializtion file for the model for prediction
     def writeintialfile(self, filename, timestep):
         fr = open(filename,"r")
         count = 0
