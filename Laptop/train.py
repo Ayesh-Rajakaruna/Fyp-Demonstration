@@ -32,16 +32,17 @@ class Train():
         X_train, Y_train = self.NeuralFunction.readFile(filename, self.number_of_inputs)
         X_train_, Y_train_ = self.NeuralFunction.intializeDataSet(X_train,Y_train)
         Sequential_X_train, Sequential_Y_train = self.NeuralFunction.reArangeDataSet(X_train_, Y_train_, self.time_steps)
-        len_of_x_train = int(len(Sequential_X_train)*0.8)
 
+        # split data into train and validation
+        len_of_x_train = int(len(Sequential_X_train)*0.8)
         Sequential_X_val = Sequential_X_train[len_of_x_train:]
         Sequential_Y_val = Sequential_Y_train[len_of_x_train:]
         Sequential_X_train = Sequential_X_train[:len_of_x_train]
         Sequential_Y_train = Sequential_Y_train[:len_of_x_train]
   
+        # make the data set size divisible by batch size
         Training_data_set_size = len(Sequential_X_train) - len(Sequential_X_train)%self.batch_size 
         Validation_data_set_size = len(Sequential_X_val) - len(Sequential_X_val)%self.batch_size
-
         X_train = Sequential_X_train[:Training_data_set_size]
         Y_train = Sequential_Y_train[:Training_data_set_size]
         X_val = Sequential_X_val[:Validation_data_set_size]
