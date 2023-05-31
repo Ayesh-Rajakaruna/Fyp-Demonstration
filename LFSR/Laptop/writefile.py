@@ -20,3 +20,9 @@ class WriteFile:
             self.fw = open("./Laptop/DataSets/{}{}.txt".format(self.Name, self.fileNum), "w")
         self.fw.write(data+"\n")
         self.count += 1
+    def getListOfInitialization(self):
+        ListOfInitialization = []
+        ReadFile = open("Laptop/DataSets/Initialization.txt","r")
+        for line in ReadFile:
+            ListOfInitialization.append(line[:-1])
+        return ListOfInitialization

@@ -19,8 +19,8 @@ class Main:
         response = requests.get(self._url_start_transmition)
         print(response.text)
         if response.text== "ReadyToTransmit":
-            openfile =  WriteFile()
-            openfile.start("Counter")
+            self.openfile =  WriteFile()
+            self.openfile.start("Counter")
             count = 0
             while count<self.data.get_number_of_data_point():
                 response = requests.post(self._url_get_line)
@@ -28,20 +28,21 @@ class Main:
                 if response.text == "No element":
                     pass
                 else:
-                    openfile.write(response.text)
+                    self.openfile.write(response.text)
                     count = count + 1
-            del openfile
         self.askInput()
         
     def askInput(self):
         print("Ready to predict")
         self.predict.makeIntialzationList()
-        
+        LisOfResult = self.openfile.getListOfInitialization()
         while True:   
             response = requests.get(self._url_ask_input)
             predict_result = self.predict.predictresult(response.text.split("\n")[0])
-            print(predict_result)
-            response = requests.post(self._url_send_data, data=predict_result)
+            LisOfResult.append(predict_result)
+            ResultOfData = LisOfResult.pop(0)
+            print(ResultOfData)
+            response = requests.post(self._url_send_data, data=ResultOfData)
 if __name__ == '__main__':
     Main = Main()
     Main.run()
