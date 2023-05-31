@@ -71,11 +71,17 @@ class Test:
 #     return decimal_value
 
 # # custom function
-# test = Test(4)
+# test = Test()
 # test.makeIntialzationList()
 # while True:
 #    i = input("Give Input: ")
-#    print(binary_to_decimal(test.predictresult(i)))
+
+#    decimal_value = int(test.predictresult(i), 2)
+#    hex_value = hex(decimal_value)
+#    hex_value_without_prefix = hex_value[2:]  # Remove '0x' prefix
+#    hex_value_padded = hex_value_without_prefix.zfill(4)  # Pad with zeros to ensure length of 4  
+#    binary_value = format(decimal_value, '016b')
+#    print(binary_value, '    ', hex_value_padded) 
 #    print(" ")
 # 001001001111
 # 000111101011

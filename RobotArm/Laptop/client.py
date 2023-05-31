@@ -7,10 +7,10 @@ import time
 class Main:
 
     def __init__(self):
-        self._url_start_transmition = 'http://172.20.10.4:8000/start_transmition'
-        self._url_get_line = 'http://172.20.10.4:8000/get_line'
-        self._url_ask_input = 'http://172.20.10.4:8000/ask_input'
-        self._url_send_data = 'http://172.20.10.4:8000/send_data'
+        self._url_start_transmition = 'http://192.168.100.128:8000/start_transmition'
+        self._url_get_line = 'http://192.168.100.128:8000/get_line'
+        self._url_ask_input = 'http://192.168.100.128:8000/ask_input'
+        self._url_send_data = 'http://192.168.100.128:8000/send_data'
 
         self.predict = [Test(1), Test(2), Test(3), Test(4)] 
         self.data = Data()
@@ -47,4 +47,4 @@ class Main:
             response = requests.post(self._url_send_data, data=predict_result)
 if __name__ == '__main__':
     Main = Main()
-    Main.run()
+    Main.askInput()

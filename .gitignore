@@ -1,4 +1,5 @@
-/Laptop/DataSets
-/Laptop/__pycache__
-/Laptop/Weights
-/RaspberryPi/__pycache__
+LFSR/Laptop/DataSets
+LFSR/Laptop/__pycache__
+RobotArm/Laptop/__pycache__
+LFSR/Laptop/Weights
+LFSR/RaspberryPi/__pycache__
