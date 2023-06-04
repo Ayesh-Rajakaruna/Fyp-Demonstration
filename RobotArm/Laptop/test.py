@@ -44,7 +44,7 @@ class Test:
 
         self.X_train_, self.Y_train_ = self.NeuralFunction.intializeDataSet(self.X_train,self.Y_train)
         self.Input_Data_For_Prediction = self.NeuralFunction.makeInputForPradict(self.X_train_, self.Y_train_, self.time_steps)
-
+        print(self.Input_Data_For_Prediction)
         predicted_result = self.model.predict(self.Input_Data_For_Prediction)
         predicted_result, predictresultlist = self.NeuralFunction.listToString(predicted_result)
 
@@ -71,11 +71,11 @@ class Test:
 #     return decimal_value
 
 # # custom function
-# test = Test(4)
-# test.makeIntialzationList()
-# while True:
-#    i = input("Give Input: ")
-#    print(binary_to_decimal(test.predictresult(i)))
-#    print(" ")
+test = Test(4)
+test.makeIntialzationList()
+while True:
+    i = input("Give Input: ")
+    print(test.predictresult(i))
+    print(" ")
 # 001001001111
 # 000111101011

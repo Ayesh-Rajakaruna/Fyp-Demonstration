@@ -107,3 +107,19 @@ class Help:
             output = output + str(round(i)) 
             lis.append(round(i))
         return output,lis
+    
+    def testModel(self, model, X_test, y_test):
+        numerofcorrect = 0
+        for i in range(len(X_test)):
+            x_input = X_test[i]
+            y_input = y_test[i]
+            result = model.predict(np.array([x_input]))
+            result = np.around(result[0])
+            print(result)
+            print(y_input)
+            for i,j in zip(result,y_input):
+                if int(i) != j:
+                    break
+            else:
+                numerofcorrect = numerofcorrect + 1
+        return (numerofcorrect/len(X_test)*100)

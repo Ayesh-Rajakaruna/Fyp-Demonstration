@@ -56,16 +56,24 @@ class Train():
 
         model = self.NeuralFunction.createModel(Sequential_X_train[0].shape, self.number_of_outputs, k_initializer, opt,  self.batch_size)            
         try:
-            model.load_weights('./Laptop/Weights/my_model_weights1.h5')
+            model.load_weights('./Laptop/Weights/my_model_weights.h5')
         except:
             pass
         model = self.NeuralFunction.trainModel(model, X_train, Y_train, X_val, Y_val, self.epochs, self.batch_size)
-        model.save_weights('./Laptop/Weights/my_model_weights1.h5')
+        model.save_weights('./Laptop/Weights/my_model_weights.h5')
+
+        # Test the model using the validation data
+        modelForTest = self.NeuralFunction.createModel(Sequential_X_train[0].shape, self.number_of_outputs, k_initializer, opt,  1)
+        modelForTest.load_weights('./Laptop/Weights/my_model_weights.h5')
+        
+        accuracy = self.NeuralFunction.testModel(modelForTest, X_val, Y_val)
+        return accuracy
+
         # For wights & model
         # model.save('NN for testing/saved_model/my_model.hdf5')
         # model.save_weights('NN for testing/saved_model/my_model_weights.h5')
 
 #custom function
-# train = Train()
-# train.traingstart(filename="./Laptop/DataSets/received_data.txt")
+train = Train()
+train.traingstart(filename="./Laptop/DataSets/received_data.txt")
        

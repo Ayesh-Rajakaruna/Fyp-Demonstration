@@ -21,15 +21,14 @@ class Main:
         if response.text== "ReadyToTransmit":
             openfile =  WriteFile()
             openfile.start("Counter")
-            count = 0
-            while count<self.data.get_number_of_data_point():
+            accuracy = 0
+            while accuracy<self.data.accuracy():
                 response = requests.post(self._url_get_line)
                 print(response.text)
                 if response.text == "No element":
                     pass
                 else:
-                    openfile.write(response.text)
-                    count = count + 1
+                    accuracy = openfile.write(response.text)
             del openfile
         self.askInput()
         

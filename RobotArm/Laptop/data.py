@@ -6,7 +6,7 @@ class Data:
         self.__time_steps = 11
         self.__epochs = 10
         self.__lr = 0.01
-        self.__number_of_data_point = 10000
+        self.accuracy = 95
         self.__data_per_one_file = 1000
 
     def get_data_per_one_file(self):
