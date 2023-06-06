@@ -74,6 +74,6 @@ class Train():
         # model.save_weights('NN for testing/saved_model/my_model_weights.h5')
 
 #custom function
-train = Train()
-train.traingstart(filename="./Laptop/DataSets/received_data.txt")
+# train = Train()
+# train.traingstart(filename="./Laptop/DataSets/received_data.txt")
        

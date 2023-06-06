@@ -1,13 +1,13 @@
 class Data:
     def __init__(self):
-        self.__batch_size = 5000
+        self.__batch_size = 5
         self.__number_of_inputs = 1 
         self.__number_of_outputs = 16
         self.__time_steps = 17
         self.__epochs = 10
         self.__lr = 0.01
-        self.__number_of_data_point = 100000
-        self.__data_per_one_file = 10000
+        self.__accuracy = 100
+        self.__data_per_one_file = 100
 
     def get_data_per_one_file(self):
         return self.__data_per_one_file
@@ -30,5 +30,5 @@ class Data:
     def get_lr(self):
         return self.__lr
     
-    def get_number_of_data_point(self):
-        return self.__number_of_data_point
+    def get_accuracy(self):
+        return self.__accuracy

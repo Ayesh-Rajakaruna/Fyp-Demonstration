@@ -71,11 +71,11 @@ class Test:
 #     return decimal_value
 
 # # custom function
-test = Test(4)
-test.makeIntialzationList()
-while True:
-    i = input("Give Input: ")
-    print(test.predictresult(i))
-    print(" ")
+# test = Test(4)
+# test.makeIntialzationList()
+# while True:
+#     i = input("Give Input: ")
+#     print(test.predictresult(i))
+#     print(" ")
 # 001001001111
 # 000111101011

@@ -46,4 +46,4 @@ class Main:
             response = requests.post(self._url_send_data, data=predict_result)
 if __name__ == '__main__':
     Main = Main()
-    Main.askInput()
+    Main.run()
