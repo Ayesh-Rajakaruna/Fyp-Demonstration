@@ -7,10 +7,10 @@ import time
 class Main:
 
     def __init__(self):
-        self._url_start_transmition = 'http://192.168.100.128:8000/start_transmition'
-        self._url_get_line = 'http://192.168.100.128:8000/get_line'
-        self._url_ask_input = 'http://192.168.100.128:8000/ask_input'
-        self._url_send_data = 'http://192.168.100.128:8000/send_data'
+        self._url_start_transmition = 'http://192.168.100.106:8000/start_transmition'
+        self._url_get_line = 'http://192.168.100.106:8000/get_line'
+        self._url_ask_input = 'http://192.168.100.106:8000/ask_input'
+        self._url_send_data = 'http://192.168.100.106:8000/send_data'
 
         self.predict = Test()
         self.data = Data()
