@@ -1,11 +1,11 @@
-#define togel_s1 2
-#define freez_s1 3
-#define togel_s2 4
-#define freez_s2 5
-#define togel_s3 6
-#define freez_s3 7
-#define togel_s4 8
-#define freez_s4 9
+#define togel_s1 13
+#define freez_s1 12
+#define togel_s2 11
+#define freez_s2 10
+#define togel_s3 9
+#define freez_s3 8
+#define togel_s4 7
+#define freez_s4 6
 
 void setup() {
   pinMode(togel_s1,OUTPUT);
